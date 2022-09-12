@@ -66,7 +66,7 @@ module RDF::Raptor::FFI::V2
       end
       define_handler(:write_bytes) do |context, data, size, nmemb|
         begin
-          @io.write(data.read_string(size * nmemb))
+          @io.write(data.read_string(size * nmemb).force_encoding(Encoding::UTF_8))
           0
         rescue => e
           $stderr.puts("#{e} in #{self.class}#write_bytes")
